@@ -1,0 +1,19 @@
+TODO LIST:
+
+09-12-2013
+
+Create hangman images
+Create hangman.xml
+	button 'new game'
+	button 'settings'
+	background layout
+	
+10-12-2013
+
+Discuss design doc
+Create global variables (design doc)
+Create link button 'new game' + link button in MainActivity
+
+11-12-2013 - 12-12-2013
+
+Create RandomWord function (use words.xml)

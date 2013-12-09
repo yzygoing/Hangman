@@ -1,0 +1,111 @@
+Designdocument Hangman
+5878241
+
+MainController (New Game)
+
+Onclick button 'new game' OR Start hangman
+
+LoadScreen()
+
+// Load RandomWord at beginning of new game
+RandomWord()
+
+// Remember size of secret mword
+ SizeRandowmWord = RandomWord.size
+
+// Keep track of correct tries
+CorrectTries = 0
+
+// Keep track of wrong tries
+WrongTries = 0
+
+// Get keyboard input from user
+KeyboardInput = get input
+Check: KeyboardInput = alphabetic?
+Freeze Keyboard (2 seconds) // User should not input another character before check
+
+currentWord = ""
+for every character in randomWord
+	currentWord += '_'
+
+
+// Check users input with randomword
+For every character in Randomword at index i
+  if character == Keyboardinput
+    currentWord[i] = character
+    CorrectTries = CorrectTries+ 1
+
+  // If user enters wrong character
+  Else
+    WrongTries = WrongTries +1
+    ViewWrongTry = KeyboardInput
+
+Draw()
+Case 0: If Wrongtries = 0	show image hangman0
+Case 1: If WrongTries = 1 	show image hangman1
+Case 2: If WrongTries = 2	show image hangman2
+Case 3: If WrongTries = 3	show image hangman3
+Case 4: If WrongTries = 4	show image hangman4
+Case 5: If WrongTries = 5	show image hangman5
+Case 6: If WrongTries = 6	show image hangman6 + wait 5 seconds // before 'you lose' view is shown
+
+Win()
+if currentWord has no '-' 
+Pause game
+Freeze keyboard input
+Show 'you win' in view
+Update sql lite database:
+sql.table.word = RandomWord
+sql.table.tries = WrongTries
+sql.table.status = “Win”
+Redirect to highscores view
+
+Lose()
+If WrongTries == MAX_TRIES
+// Pauze game
+Freeze keyboard input
+Show 'you lose' in view
+Insert in sql lite database:
+sql.table.word = RandomWord
+sql.table.tries = WrongTries
+sql.table.status = “Lose”
+Start new game
+
+
+WordsModel:
+// Convert list of words to string-array of words
+LisstToArray
+Find words.xml
+Convert words.xml to words string-array
+
+// Load RandomWord
+RandomWord()
+Get words[] 
+RandomWord = Random(words string-array)
+
+HighscoresModel:
+
+// Create sql lite database
+Create SQL database
+Tables: Word(string) – Tries(int) – Status(string)
+
+View:
+
+hangman.xml:
+
+logo
+button: new game
+button: settings ????
+hangman images
+background
+	
+
+highscores.xml:
+
+logo
+button: new game
+highscores listview (show sql lite database)
+
+
+
+
