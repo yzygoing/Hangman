@@ -3,6 +3,9 @@
 
     <string name="app_name">Hangman5878241</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="new_game">New Game</string>
+    <string name="hangman0">hangman0</string>
+    <string name="hello_world">Hangman</string>
+    <string name="settings">Settings</string>
 
 </resources>

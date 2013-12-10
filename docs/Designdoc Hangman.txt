@@ -89,16 +89,32 @@ HighscoresModel:
 Create SQL database
 Tables: Word(string) – Tries(int) – Status(string)
 
+SettingsModel:
+
+// Let user change the settings
+Default()
+int wordSettings = Word contains 6 characters
+int triesSettings = Number of tries = 6
+
+if onclick settings button
+wordSettings = KeyboardInput [0 - words.length]
+triesSettings - Slider [0-10]
+
 View:
 
 hangman.xml:
 
 logo
 button: new game
-button: settings ????
-hangman images
+button: settings
+hangman images[]
 background
-	
+
+settings.xml:
+
+slider: length of word
+slider: amount of tries
+button: "back to game"
 
 highscores.xml:
 
