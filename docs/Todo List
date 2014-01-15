@@ -17,3 +17,48 @@ Create 'new game' + link button in MainActivity
 11-12-2013 - 12-12-2013
 
 Create RandomWord function (use words.xml)
+
+
+
+
+VOORBEELD XML
+	void OpenXMLFile() throws IOException
+	{
+		AssetManager assetManager = getAssets();
+		InputStream inputStream = assetManager.open("small.xml");
+		// Get all <item> from small.xml
+		// Store in string-array
+		// Get random word from string-array
+		// ArrayList<Item>items=new ArrayList<Item>();
+	}
+	
+			// init new game
+		newgame.setOnClickListener(new Button.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+	            Log.d("init new game", "test");
+			}
+		});
+		
+				// catch keyboard input
+		  Scanner input = new Scanner(System.in);
+		    System.out.println("Please enter letters:");
+		    while (!input.hasNext("[A-Za-z]+")) 
+		    {
+		        System.out.println("Nope, that's not it!");
+		        input.next();
+		    }
+		    
+		    String word = input.next();
+		    System.out.println("Thank you! Got " + word);
+		    
+		    		new View.OnClickListener()
+		{
+			public void onClick(View view)
+			{
+				Log.d("EditText", keyboardinput.getText().toString());
+			}
+		};	
+		    
