@@ -33,6 +33,7 @@ import android.util.Xml;
 
 public class MainActivity extends Activity 
 {
+	// Test for game over (TODO: create difficulty settings)
 	public static final int MAX_TRIES = 10;
 	
 	// Global Variables
@@ -44,7 +45,7 @@ public class MainActivity extends Activity
 	TextView guessWordView;
 	TextView wrongGuessesView;
 	ImageView hangmanImage;
-	int[] myImageList;
+	int[] hangmanViews;
     private String[] randomWordString;
     private static final Random rgenerator = new Random();
     private Resources res;
@@ -62,7 +63,7 @@ public class MainActivity extends Activity
 		// for debug purposes
 		Log.d("onCreate", "hangman");
 		
-		// hhhgset button 'new game'
+		// set button 'new game'
 		//final Button newgame = (Button) findViewById(R.id.button1);
 		
 		// set button 'settings'
@@ -93,10 +94,10 @@ public class MainActivity extends Activity
 		hangmanImage = (ImageView)findViewById(R.id.imageView1);
 		
 		// create image list
-		myImageList = new int[]
+		hangmanViews = new int[]
 				{
 				R.drawable.hangmanstart,
-				R.drawable.hangman, 
+				R.drawable.hangman0, 
 				R.drawable.hangman1,
 				R.drawable.hangman2, 
 				R.drawable.hangman3,
@@ -112,15 +113,13 @@ public class MainActivity extends Activity
 	}
 	
 	/**
-	 * Get random word
+	 * Get random word from string array from words_small.xml
 	 */
 	public String getRandomWord() 
 	{
-		// test for randomword
+		
 		String[] randomWordString;
-
 		randomWordString = res.getStringArray(R.array.words_small);
-
 		String randomWord = randomWordString[rgenerator.nextInt(randomWordString.length)];
 		
 		return randomWord;
@@ -131,27 +130,25 @@ public class MainActivity extends Activity
 		 public void afterTextChanged(Editable s) 
 	     {
 			 	String input = s.toString();
-	        	//Log.d("text changed to "+input, "hangman");
+	        	Log.d("text changed to "+input, "hangman");
 			 	if (input.length() <= 0) 
 			 	{
 			 		return;
 			 	}
 			 	char letter = input.toUpperCase().charAt(0);
-	        	//keyboardinput.setText("");
 	        	
-	        	// one letter at a time. ....
+	        	// One letter at a time
 	        	if (keyboardinput.length() > 1)
 	        	{
 	        	//	keyboardinput.setText(letter);
 	        	}
 	        	
-	        	// enter new letter in the game
+	        	// remove letter for game purpose
 	        	game.guess(letter);
 	        	s.delete(0, 1);
 	        	
-	        	// update the view of the new game word
-	        	//Drawable myDrawable = getResources().getDrawable(R.drawable.hangman3);
-	        	hangmanImage.setImageResource(myImageList[game.wrongTries]);
+	        	// update view 
+	        	hangmanImage.setImageResource(hangmanViews[game.wrongTries]);
 	        	guessWordView.setText(game.guessWord);
 	        	wrongGuessesView.setText(game.wrongGuesses);
 	        	Log.d(game.guessWord, "hangman");

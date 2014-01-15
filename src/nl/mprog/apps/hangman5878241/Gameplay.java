@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 /**
- * Main Hangman gameplay class
+ * Hangman gameplay class
  */
 public class Gameplay 
 {
@@ -17,7 +17,7 @@ public class Gameplay
 	String wrongGuesses;
 	
 	/**
-	 * Constructor
+	 * Gameplay variables
 	 */
 	public Gameplay() 
 	{
@@ -27,6 +27,10 @@ public class Gameplay
 		wrongGuesses = "Wrong Guesses: ";
 	}
 	
+	
+	/**
+	 * Check if input letter is in guessWord
+	 */
 	public void guess(char letter) 
 	{
 		int pos = letterPositionInWord(letter);
@@ -47,6 +51,10 @@ public class Gameplay
 		}
 	}
 	
+	/**
+	 * 
+	 * Check if game is won
+	 */
 	public boolean finished() 
 	{
 		if (guessWord.indexOf('-') == -1)
@@ -59,8 +67,12 @@ public class Gameplay
 		}
 	}
 	
+	/**
+	 * Game Over
+	 */
 	public boolean gameover()
 	{
+		// TODO: create difficulty settings
 		int tries = MainActivity.MAX_TRIES;
 		
 		if (wrongTries == tries)
@@ -74,7 +86,7 @@ public class Gameplay
 	}
 	
 	/**
-	 * 
+	 * Remember position for view
 	 */
 	public int letterPositionInWord(char letter) 
 	{		
@@ -82,11 +94,12 @@ public class Gameplay
 	}
 	
 	/**
-	 * 
+	 * Create hyphens for guessword in view
 	 */
 	public void setWord(String w) 
 	{
 		word = w;
+		// empty word for every new game
 		guessWord = "";
 		
 		for (int i = 0; i < word.length(); i++)
