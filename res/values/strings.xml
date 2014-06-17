@@ -5,7 +5,13 @@
     <string name="action_settings">Settings</string>
     <string name="new_game">New Game</string>
     <string name="hangman0">hangman0</string>
-    <string name="hello_world">Hangman</string>
+    <string name="Hangman">Hangman</string>
     <string name="settings">Settings</string>
-
+    <string name="Highscore">Highscores</string>
+    <string name="Test">Test</string>
+    <string name="Highscores">Highscores</string>
+    <string name="NewGame">New Game</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="restart">Restart Game</string>
+    
 </resources>

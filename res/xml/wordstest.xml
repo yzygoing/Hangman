@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="wordstest">
+	<item>HELICOPTER</item>
+	<item>RAADEND</item>
+	<item>BOEIE</item>
+	<item>DOEI</item>
+	<item>BLABLA</item>
+</string-array>
+</resources>

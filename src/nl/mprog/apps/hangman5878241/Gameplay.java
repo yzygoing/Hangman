@@ -1,6 +1,6 @@
 package nl.mprog.apps.hangman5878241;
 
-import java.util.ArrayList;
+import android.util.Log;
 
 
 /**
@@ -8,6 +8,8 @@ import java.util.ArrayList;
  */
 public class Gameplay 
 {
+	int maxWrongTries;
+	
 	int correctTries;
 	int wrongTries;
 	
@@ -19,12 +21,13 @@ public class Gameplay
 	/**
 	 * Gameplay variables
 	 */
-	public Gameplay() 
+	public Gameplay(int maxTries) 
 	{
+		maxWrongTries = maxTries;
 		correctTries = 0;
 		wrongTries = 0;
 		
-		wrongGuesses = "Wrong Guesses: ";
+		wrongGuesses = " ";
 	}
 	
 	
@@ -33,23 +36,34 @@ public class Gameplay
 	 */
 	public void guess(char letter) 
 	{
-		int pos = letterPositionInWord(letter);
 		char[] guessLetters = guessWord.toCharArray();
-		if (pos > -1) 
+		
+		// If input letter is wrong
+		if (word.indexOf(letter) == -1 && wrongGuesses.indexOf(letter) == -1) 
 		{
-			guessLetters[pos] = letter;
-			guessWord = new String(guessLetters);
-			correctTries += 1;
+			wrongGuesses = wrongGuesses + letter;
+			wrongTries += 1;
 		}
+		
+		// If input letter is correct
 		else
 		{
-			if (wrongGuesses.indexOf(letter) == -1) 
+			// Iterate over word to check for double correct input
+			for (int i = 0; i < word.length(); i++) 
 			{
-				wrongGuesses = wrongGuesses + letter;
-				wrongTries += 1;
+				if (word.charAt(i) == letter)
+				{
+					Log.d("HANGMAN", "Letter is "+letter+" OK");
+					guessLetters[i] = letter;
+				}
 			}
+			
+			// Count correct tries + update guessWord
+			correctTries += 1;
+			guessWord = new String(guessLetters);
 		}
 	}
+
 	
 	/**
 	 * 
@@ -57,7 +71,8 @@ public class Gameplay
 	 */
 	public boolean finished() 
 	{
-		if (guessWord.indexOf('-') == -1)
+		// If all hyphens are not empty, game is won
+		if (guessWord.indexOf("-") == -1)
 		{
 			return true;
 		}
@@ -71,11 +86,8 @@ public class Gameplay
 	 * Game Over
 	 */
 	public boolean gameover()
-	{
-		// TODO: create difficulty settings
-		int tries = MainActivity.MAX_TRIES;
-		
-		if (wrongTries == tries)
+	{		
+		if (wrongTries == maxWrongTries)
 		{
 			return true;
 		}
@@ -102,6 +114,7 @@ public class Gameplay
 		// empty word for every new game
 		guessWord = "";
 		
+		// Create empty row of hyphens from word length (for view + win)
 		for (int i = 0; i < word.length(); i++)
 		{
 			guessWord = guessWord + "-";

@@ -5,14 +5,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="7"
+        android:minSdkVersion="19"
         android:targetSdkVersion="19" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/DeviceDefault.Light.ButtonBar" >
         <activity
             android:name="nl.mprog.apps.hangman5878241.MainActivity"
             android:label="@string/app_name" >
@@ -22,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        <activity android:name=".HighscoresActivity"></activity>
+	  <activity
+	    android:name=".SettingsActivity"
+	    android:theme="@style/AppBaseTheme" >
+	  </activity>    
+  </application>
 
 </manifest>
