@@ -30,6 +30,7 @@ public class HighscoresActivity extends Activity
         test.setText("");
         for (Highscores.Score scr : hs.scoreStrings)
         {
+        	// make sure only 10 highscores are in view
         	if (count >= 10)
         		break;
         	test.setText(test.getText() + "\n" + scr.toString());

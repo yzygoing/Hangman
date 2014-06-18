@@ -22,12 +22,7 @@ import android.app.ActionBar;
  
 
 public class MainActivity extends Activity 
-{
-	// Test for game over (TODO: create difficulty settings)
-	//public static final int MAX_TRIES = 5;
-	//public static final int DIFFICULTY_SETTINGS = 4;
-
-	
+{	
 	// Global Variables
 	Gameplay game; 
 	Highscores highscores;
@@ -65,7 +60,7 @@ public class MainActivity extends Activity
 		max_tries = Integer.parseInt(sharedPrefs.getString("max_wrong_tries", "7"));
 		difficulty_settings = Integer.parseInt(sharedPrefs.getString("difficulty", "5"));
 		
-		// Create our game instance
+		// Create new game
 		game = new Gameplay(max_tries); 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -73,9 +68,6 @@ public class MainActivity extends Activity
 		// hide highscore button
 		highscore = (Button) findViewById(R.id.button1);
 		highscore.setVisibility(View.INVISIBLE);
-
-		// for debug purposes
-		Log.d("onCreate", "hangman");
 		 
 		// set keyboard
 		keyboardinput = (EditText)findViewById(R.id.editText1);
@@ -86,8 +78,6 @@ public class MainActivity extends Activity
 		
 		// get a random word
 		game.setWord(getRandomWord());
-		Log.d("HANGMAN", "Randomword = "+game.word);
-		Log.d("HANGMAN", "Guessword = "+game.guessWord);
 	
 		// set guessword
 		guessWordView = (TextView)findViewById(R.id.textView2);
@@ -134,7 +124,6 @@ public class MainActivity extends Activity
 	// settings menu: set restart + difficulty activities
 	  public boolean onOptionsItemSelected(MenuItem item) 
 	{
-		Log.d("HANGMAN", "Item selected: "+item.getItemId());
 	    switch (item.getItemId()) 
 	    {
 	    	// restart (use new game activity)
@@ -148,7 +137,7 @@ public class MainActivity extends Activity
 		    	startActivity(settingsActivity);
 		      break;
 		    default:
-		      break;
+		      break;  
 	    }
 
 	    return true;
@@ -166,7 +155,7 @@ public class MainActivity extends Activity
 		// Get random word from string
 		String randomWord = randomWordString[rgenerator.nextInt(randomWordString.length)];
 		
-		// Check if random word is bigger than difficulty settings
+		// Check if random word is larger than difficulty settings, if so load new random word and check again
 		while (randomWord.length() > difficulty_settings)
 		{
 			randomWord = randomWordString[rgenerator.nextInt(randomWordString.length)];
@@ -181,9 +170,6 @@ public class MainActivity extends Activity
 		 public void afterTextChanged(Editable s) 
 	     { 
 			 	String input = s.toString();
-			 	
-			 	// Debug
-	        	Log.d("text changed to "+input, "hangman");
 	        	
 	        	// Prevent crash
 			 	if (input.length() <= 0) 
@@ -203,11 +189,19 @@ public class MainActivity extends Activity
 	        	game.guess(letter);
 	        	s.delete(0, 1);
 	        	
-	        	// update view 
-	        	hangmanImage.setImageResource(hangmanViews[game.wrongTries]);
+	        	// update view
+	        	int currentImage = game.wrongTries;
+	        	
+	        	// (Not enough images) if not game-over, if not game won, stick with hangman7.png
+	        	if (!game.gameover() && !game.finished() && currentImage > 7)
+	        		currentImage = 7;
+	        	// if hangmanimage is >= than 7, stick with hangman7
+	        	if (currentImage >= hangmanViews.length)
+	        		currentImage = hangmanViews.length-1;
+	        	hangmanImage.setImageResource(hangmanViews[currentImage]);
+	        	
 	        	guessWordView.setText(game.guessWord);
 	        	wrongGuessesView.setText(game.wrongGuesses);
-	        	Log.d("HANGMAN", game.guessWord); 
 	        	
 	        	// check if game is won
 	        	if (game.finished() == true)  

@@ -112,5 +112,4 @@ public class Highscores
 		highscoreEdit.putString("highscores", previousScore + "|" + newScore);
 		highscoreEdit.commit();
 	}
-	
 }

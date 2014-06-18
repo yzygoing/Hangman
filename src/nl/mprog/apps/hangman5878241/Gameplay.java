@@ -1,8 +1,5 @@
 package nl.mprog.apps.hangman5878241;
 
-import android.util.Log;
-
-
 /**
  * Hangman gameplay class
  */
@@ -53,7 +50,6 @@ public class Gameplay
 			{
 				if (word.charAt(i) == letter)
 				{
-					Log.d("HANGMAN", "Letter is "+letter+" OK");
 					guessLetters[i] = letter;
 				}
 			}
